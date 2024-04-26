@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Analysis Form</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url('data:image/svg+xml;utf8,<svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>');
+            background-repeat: no-repeat;
+            background-position-x: calc(100% - 12px);
+            background-position-y: center;
+            padding-right: 30px;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .result {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .result h3 {
+            color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Predictive Analysis Form</h1>
+        <form action="{{ url_for('predict')}}" method="post">
+            <label for="Year">Year:</label>
+            <input id="Year" name="Year" type="number" required>
+
+            <label for="Present_Price">Showroom Price (in lakhs):</label>
+            <input id="Present_Price" name="Present_Price" type="number" required>
+
+            <label for="Kms_Driven">Kilometers Driven:</label>
+            <input id="Kms_Driven" name="Kms_Driven" type="number" required>
+
+            <label for="Owner">Number of Previous Owners (0, 1, or 3):</label>
+            <input id="Owner" name="Owner" type="number" required>
+
+            <label for="Fuel_Type">Fuel Type:</label>
+            <select id="Fuel_Type" name="Fuel_Type_Petrol" required>
+                <option value="Petrol">Petrol</option>
+                <option value="Diesel">Diesel</option>
+                <option value="CNG">CNG</option>
+            </select>
+
+            <label for="Seller_Type">Seller Type:</label>
+            <select id="Seller_Type" name="Seller_Type_Individual" required>
+                <option value="Dealer">Dealer</option>
+                <option value="Individual">Individual</option>
+            </select>
+
+            <label for="Transmission">Transmission Type:</label>
+            <select id="Transmission" name="Transmission_Mannual" required>
+                <option value="Manual">Manual Car</option>
+                <option value="Automatic">Automatic Car</option>
+            </select>
+
+            <button type="submit">Calculate Selling Price</button>
+        </form>
+
+        <div class="result">
+            <h3>{{ prediction_text }}</h3>
+        </div>
+    </div>
+</body>
+
+</html>
